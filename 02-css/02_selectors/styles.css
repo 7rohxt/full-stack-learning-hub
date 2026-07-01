@@ -1,0 +1,40 @@
+/* ===========================
+   1. Element Selector
+=========================== */
+
+h2 {
+    color: darkblue;
+}
+
+
+/* ===========================
+   2. Class Selector
+=========================== */
+
+.intro {
+    color: green;
+    font-size: 18px;
+}
+
+.btn {
+    background-color: steelblue;
+    color: white;
+}
+
+
+/* ===========================
+   3. ID Selector
+=========================== */
+
+#main-title {
+    color: crimson;
+}
+
+
+/* ===========================
+   4. Descendant Selector
+=========================== */
+
+.card p {
+    color: purple;
+}
