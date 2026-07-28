@@ -10,6 +10,8 @@ all_todos = [
     {'todo_id': 5, 'todo_name': 'Meditate', 'todo_description': 'Meditate 20 minutes'}
 ]
 
+# Get Methods ------------------------------------------------------------------------------------------------------
+
 @app.get('/')  # static route
 def index():
     return {"message": "Hello World"}
@@ -31,7 +33,7 @@ def get_all_todos(first_n: int = None):
     return all_todos
 
 
-# Post Methods (Try it out with swagger UI or curl)
+# Post Method (Try it out with swagger UI or curl) -----------------------------------------------------------------
 
 @app.post('/todos')
 def create_todo(new_todo: dict):
@@ -46,3 +48,26 @@ def create_todo(new_todo: dict):
     all_todos.append(new_todo)
 
     return new_todo
+
+# Put Method -------------------------------------------------------------------------------------------------------
+
+@app.put('/todos/{todo_id}')
+def update_todo(todo_id: int, updated_todo: dict):
+    for todo in all_todos:
+        if todo['todo_id'] == todo_id:
+            todo['todo_name'] = updated_todo['todo_name']
+            todo['todo_description'] = updated_todo['todo_description']
+            return todo
+
+    return "Error, not found"
+
+# Delete Method ---------------------------------------------------------------------------------------------------
+
+@app.delete('/todos/{todo_id}')
+def delete_todo(todo_id: int):
+    for index, todo in enumerate(all_todos):
+        if todo['todo_id'] == todo_id:
+            deleted_todo = all_todos.pop(index)
+            return deleted_todo
+
+    return "Error, not found"
