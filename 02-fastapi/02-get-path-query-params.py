@@ -25,7 +25,24 @@ def get_todo(todo_id: int):
             return {"result": todo}
 
 @app.get('/todos')  # query params. Run with http://127.0.0.1:9999/todos?first_n=3
-def all_todos(first_n: int = None):
+def get_all_todos(first_n: int = None):
     if first_n:
         return all_todos[:first_n]
     return all_todos
+
+
+# Post Methods (Try it out with swagger UI or curl)
+
+@app.post('/todos')
+def create_todo(new_todo: dict):
+    new_todo_id = max(todo['todo_id'] for todo in all_todos) + 1
+
+    new_todo = {
+        'todo_id' : new_todo_id,
+        'todo_name' : new_todo['todo_name'],
+        'todo_description' : new_todo['todo_description']
+    }
+
+    all_todos.append(new_todo)
+
+    return new_todo
